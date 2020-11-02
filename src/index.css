@@ -11,3 +11,40 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+#body{
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+}
+
+.dot{
+  height: 35px;
+  width: 35px;
+  background-color: #AA00FF;
+  border-radius: 25%;
+  display: inline-block;
+  position: relative;
+  top:1em;
+  left:2em;
+}
+.MuiTypography-gutterBottom {
+    margin-bottom: 0.35em;
+}
+
+.MuiTypography-subtitle1 {
+    font-size: 1rem;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 400;
+    line-height: 1.75;
+    letter-spacing: 0.00938em;
+
+}
+
+.MuiTypography-root{
+  padding:10px !important;
+}
+
+.MuiPagination-ul{
+  position: relative !important;
+  left:17em !important
+}

@@ -1,42 +1,47 @@
 import React, { Component, useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
 import InputBase from "@material-ui/core/InputBase";
-import { fade, makeStyles } from "@material-ui/core/styles";
-import MenuIcon from "@material-ui/icons/Menu";
+import { fade, makeStyles, withStyles } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
-import data from "./../data/review.json";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import EventNoteSharpIcon from "@material-ui/icons/EventNoteSharp";
-import Accordion from "@material-ui/core/Accordion";
-import AccordionSummary from "@material-ui/core/AccordionSummary";
-import AccordionDetails from "@material-ui/core/AccordionDetails";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Rating from "@material-ui/lab/Rating";
-import Box from "@material-ui/core/Box";
-import ProgressBar from "react-bootstrap/ProgressBar";
-import ListSubheader from "@material-ui/core/ListSubheader";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Collapse from "@material-ui/core/Collapse";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import DraftsIcon from "@material-ui/icons/Drafts";
-import SendIcon from "@material-ui/icons/Send";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
-import StarBorder from "@material-ui/icons/StarBorder";
-import { Table, Flag } from "semantic-ui-react";
+import LinearProgress from "@material-ui/core/LinearProgress";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Typography from "@material-ui/core/Typography";
+
+const useStyles1 = makeStyles({
+  root: {
+    width: "100%",
+  },
+});
+
+
+const BorderLinearProgress = withStyles((theme) => ({
+  root: {
+    marginLeft: 10,
+    marginTop: 2,
+    height: 12,
+    borderRadius: 2,
+  },
+  colorPrimary: {
+    backgroundColor: "white",
+  },
+  bar: {
+    borderRadius: 5,
+    backgroundColor: "#EBEBE3",
+  },
+}))(LinearProgress);
 
 const useStyles = makeStyles((theme) => ({
   search: {
@@ -98,6 +103,7 @@ const useStyles = makeStyles((theme) => ({
 const MainContent = (props) => {
   const [value, setValue] = React.useState(2);
   const classes = useStyles();
+  const classes1 = useStyles1();
   const [change, setChange] = React.useState("");
   const [scale, setScale] = React.useState(-1);
   const [open, setOpen] = React.useState(true);
@@ -117,44 +123,29 @@ const MainContent = (props) => {
   const handleClick3 = () => {
     setOpen3(!open3);
   };
-  
 
   useEffect(() => {
-    console.log("hello")
+    console.log("hello");
     setinfo1(props.info);
     setinfodate(props.info);
- 
-      if (date == -1) {
-        todayall();
-      }
-      if (date == 0) {
-        todaydate();
-      }
-      if (date == 1) {
-        todayweek();
-      }
-      if (date == 10) {
-        todaymonth();
-      }
-      if (date == 100) {
-        todayyear();
-      }
-  
- 
-  
+
+    if (date == -1) {
+      todayall();
+    }
+    if (date == 0) {
+      todaydate();
+    }
+    if (date == 1) {
+      todayweek();
+    }
+    if (date == 10) {
+      todaymonth();
+    }
+    if (date == 100) {
+      todayyear();
+    }
   }, [props.info]);
 
-
-    
-   
-
-
-
-
- 
-  // useEffect((props) => {
-  //   props.parentCallback1(info1)
-  // },[info1]);
   console.log(info1);
 
   const country = [
@@ -227,7 +218,6 @@ const MainContent = (props) => {
     if (event.target.value == -1) {
       todayall();
       datechange(-1);
-      
     }
     if (event.target.value == 0) {
       todaydate();
@@ -245,9 +235,6 @@ const MainContent = (props) => {
       todayyear();
       datechange(100);
     }
-
-
- 
   };
 
   const todayall = () => {
@@ -255,8 +242,7 @@ const MainContent = (props) => {
     console.log(datetoday);
     setinfo1(datetoday);
     setinfodate(datetoday);
-    filter(change,datetoday);
-
+    filter(change, datetoday);
   };
 
   const todaydate = () => {
@@ -271,8 +257,7 @@ const MainContent = (props) => {
     console.log(datetoday);
     setinfo1(datetoday);
     setinfodate(datetoday);
-    filter(change,datetoday);
-
+    filter(change, datetoday);
   };
 
   const todayweek = () => {
@@ -303,8 +288,7 @@ const MainContent = (props) => {
     console.log(datetoday);
     setinfo1(datetoday);
     setinfodate(datetoday);
-    filter(change,datetoday);
- 
+    filter(change, datetoday);
   };
 
   const todaymonth = () => {
@@ -328,8 +312,7 @@ const MainContent = (props) => {
     console.log(datetoday);
     setinfo1(datetoday);
     setinfodate(datetoday);
-    filter(change,datetoday);
-  
+    filter(change, datetoday);
   };
 
   const todayyear = () => {
@@ -353,16 +336,15 @@ const MainContent = (props) => {
     console.log(datetoday);
     setinfo1(datetoday);
     setinfodate(datetoday);
-    filter(change,datetoday);
-
+    filter(change, datetoday);
   };
 
   const handleChange = (event) => {
     setChange(event.target.value);
     console.log(event.target.value);
-    filter(event.target.value,infodate);
+    filter(event.target.value, infodate);
   };
-  const filter = (changes,item) => {
+  const filter = (changes, item) => {
     const filteredDataSearch = item.filter(
       (item) =>
         item.appStoreName.toUpperCase().indexOf(changes.toUpperCase()) !== -1 ||
@@ -435,10 +417,14 @@ const MainContent = (props) => {
       <Grid className={classes.root} item xs={4} sm={4}>
         <List component="nav" className={classes.root}>
           <ListItem button onClick={handleClick}>
-            <ListItemIcon>
-              <InboxIcon />
-            </ListItemIcon>
-            <ListItemText primary="Filter By Rating" />
+            <ListItemText
+              disableTypography
+              primary={
+                <Typography type="body2" style={{ fontWeight: 600 }}>
+                  Filter By Rating
+                </Typography>
+              }
+            />
             {open ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
           <Collapse in={open} timeout="auto" unmountOnExit>
@@ -451,6 +437,15 @@ const MainContent = (props) => {
                 {/* <ListItemIcon> */}
 
                 <Rating name="read-only" value={5} readOnly />
+                <div className={classes1.root}>
+                  <BorderLinearProgress
+                    variant="determinate"
+                    value={
+                      (100 * info1.filter((item) => item.rating == 5).length) /
+                      info1.length
+                    }
+                  />
+                </div>
                 {info1.filter((item) => item.rating == 5).length}
 
                 {/* </ListItemIcon>
@@ -464,6 +459,15 @@ const MainContent = (props) => {
                 {/* <ListItemIcon> */}
 
                 <Rating name="read-only" value={4} readOnly />
+                <div className={classes1.root}>
+                  <BorderLinearProgress
+                    variant="determinate"
+                    value={
+                      (100 * info1.filter((item) => item.rating == 4).length) /
+                      info1.length
+                    }
+                  />
+                </div>
                 {info1.filter((item) => item.rating == 4).length}
                 {/* </ListItemIcon>
             <ListItemText primary="Starred" /> */}
@@ -474,6 +478,15 @@ const MainContent = (props) => {
                 className={classes.nested}
               >
                 <Rating name="read-only" value={3} readOnly />
+                <div className={classes1.root}>
+                  <BorderLinearProgress
+                    variant="determinate"
+                    value={
+                      (100 * info1.filter((item) => item.rating == 3).length) /
+                      info1.length
+                    }
+                  />
+                </div>
                 {info1.filter((item) => item.rating == 3).length}
                 {/* </ListItemIcon>
             <ListItemText primary="Starred" /> */}
@@ -486,6 +499,15 @@ const MainContent = (props) => {
                 {/* <ListItemIcon> */}
 
                 <Rating name="read-only" value={2} readOnly />
+                <div className={classes1.root}>
+                  <BorderLinearProgress
+                    variant="determinate"
+                    value={
+                      (100 * info1.filter((item) => item.rating == 2).length) /
+                      info1.length
+                    }
+                  />
+                </div>
                 {info1.filter((item) => item.rating == 2).length}
                 {/* </ListItemIcon>
             <ListItemText primary="Starred" /> */}
@@ -498,6 +520,15 @@ const MainContent = (props) => {
                 {/* <ListItemIcon> */}
 
                 <Rating name="read-only" value={1} readOnly />
+                <div className={classes1.root}>
+                  <BorderLinearProgress
+                    variant="determinate"
+                    value={
+                      (100 * info1.filter((item) => item.rating == 1).length) /
+                      info1.length
+                    }
+                  />
+                </div>
                 {info1.filter((item) => item.rating == 1).length}
                 {/* </ListItemIcon>
             <ListItemText primary="Starred" /> */}
@@ -505,10 +536,14 @@ const MainContent = (props) => {
             </List>
           </Collapse>
           <ListItem button onClick={handleClick2}>
-            <ListItemIcon>
-              <InboxIcon />
-            </ListItemIcon>
-            <ListItemText primary="Filter By Version" />
+            <ListItemText
+              disableTypography
+              primary={
+                <Typography type="body2" style={{ fontWeight: 600 }}>
+                  Filter By Version
+                </Typography>
+              }
+            />
             {open2 ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
           <Collapse in={open2} timeout="auto" unmountOnExit>
@@ -518,7 +553,7 @@ const MainContent = (props) => {
                 onClick={() => handleChangeVersion("0.1")}
                 className={classes.nested}
               >
-                0.1{" "}
+                0.1<span style={{marginRight:"9.75em", display:"inline-block"}}>&nbsp;</span>
                 {info1.filter((item) => item.version.includes("0.1")).length}
                 {/* </ListItemIcon>
             <ListItemText primary="Starred" /> */}
@@ -529,7 +564,7 @@ const MainContent = (props) => {
                 className={classes.nested}
               >
                 {/* <ListItemIcon> */}
-                1.2.1{" "}
+                1.2.1<span style={{marginRight:"9em", display:"inline-block"}}>&nbsp;</span>
                 {info1.filter((item) => item.version.includes("1.2.1")).length}
                 {/* </ListItemIcon>
             <ListItemText primary="Starred" /> */}
@@ -539,7 +574,7 @@ const MainContent = (props) => {
                 onClick={() => handleChangeVersion("1.0")}
                 className={classes.nested}
               >
-                1.0{" "}
+                1.0<span style={{marginRight:"9.75em", display:"inline-block"}}>&nbsp;</span>
                 {
                   info1.filter(
                     (item) =>
@@ -557,7 +592,7 @@ const MainContent = (props) => {
                 onClick={() => handleChangeVersion("1.1")}
                 className={classes.nested}
               >
-                1.1{" "}
+                1.1<span style={{marginRight:"9.75em", display:"inline-block"}}>&nbsp;</span>
                 {info1.filter((item) => item.version.includes("1.1")).length}
                 {/* </ListItemIcon>
             <ListItemText primary="Starred" /> */}
@@ -567,7 +602,8 @@ const MainContent = (props) => {
                 onClick={() => handleChangeVersion("1.2")}
                 className={classes.nested}
               >
-                1.2 {info1.filter((item) => item.version == "1.2").length}
+                1.2<span style={{marginRight:"9.75em", display:"inline-block"}}>&nbsp;</span>
+                {info1.filter((item) => item.version == "1.2").length}
                 {/* </ListItemIcon>
             <ListItemText primary="Starred" /> */}
               </ListItem>
@@ -576,7 +612,7 @@ const MainContent = (props) => {
                 onClick={() => handleChangeVersion("1.3")}
                 className={classes.nested}
               >
-                1.3{" "}
+                1.3<span style={{marginRight:"9.75em", display:"inline-block"}}>&nbsp;</span>
                 {info1.filter((item) => item.version.includes("1.3")).length}
                 {/* </ListItemIcon>
             <ListItemText primary="Starred" /> */}
@@ -584,10 +620,14 @@ const MainContent = (props) => {
             </List>
           </Collapse>
           <ListItem button onClick={handleClick3}>
-            <ListItemIcon>
-              <InboxIcon />
-            </ListItemIcon>
-            <ListItemText primary="Filter By Country" />
+            <ListItemText
+              disableTypography
+              primary={
+                <Typography type="body2" style={{ fontWeight: 600 }}>
+                  Filter By Country
+                </Typography>
+              }
+            />
             {open3 ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
           <Collapse in={open3} timeout="auto" unmountOnExit>
@@ -598,7 +638,8 @@ const MainContent = (props) => {
                   onClick={() => handleChangeCountry(item.name)}
                   className={classes.nested}
                 >
-                  {item.name}{" "}
+             
+                  {item.name}   {" "}
                   {
                     info1.filter((items) => items.countryName == item.name)
                       .length

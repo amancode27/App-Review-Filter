@@ -165,6 +165,7 @@ const ProdSort = (props) => {
             value={app}
             IconComponent={KeyboardArrowDownIcon}
             onChange={handleChange}
+            
             input={<BootstrapInput />}
           >
             <MenuItem value="All">
