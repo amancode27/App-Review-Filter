@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component, useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -36,7 +36,7 @@ import SendIcon from "@material-ui/icons/Send";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import StarBorder from "@material-ui/icons/StarBorder";
-import { Table, Flag } from 'semantic-ui-react'
+import { Table, Flag } from "semantic-ui-react";
 
 const useStyles = makeStyles((theme) => ({
   search: {
@@ -95,15 +95,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MainContent = () => {
+const MainContent = (props) => {
   const [value, setValue] = React.useState(2);
   const classes = useStyles();
   const [change, setChange] = React.useState("");
   const [scale, setScale] = React.useState(-1);
-
   const [open, setOpen] = React.useState(true);
   const [open2, setOpen2] = React.useState(true);
   const [open3, setOpen3] = React.useState(true);
+  const [info1, setinfo1] = React.useState(props.info);
+  const [infodate, setinfodate] = React.useState(props.info);
+  const [date, datechange] = React.useState(-1);
 
   const handleClick = () => {
     setOpen(!open);
@@ -115,66 +117,108 @@ const MainContent = () => {
   const handleClick3 = () => {
     setOpen3(!open3);
   };
+  
 
-  const country=[
-    {name:"Australia",
-    code:'AU'},
-    {name:"Germany",
-    code:'DE'},
-    {name:"Russia",
-    code:'RU'},
-    {name:"US",
-    code:'US'},
-    {name:"Japan",
-    code:'JP'},
-    {name:"India",
-     code:'IN'},
-    {name:"UK",
-     code:'UK'},
-    {name:"France",
-     code:"FR"},
-  ]
+  useEffect(() => {
+    console.log("hello")
+    setinfo1(props.info);
+    setinfodate(props.info);
+ 
+      if (date == -1) {
+        todayall();
+      }
+      if (date == 0) {
+        todaydate();
+      }
+      if (date == 1) {
+        todayweek();
+      }
+      if (date == 10) {
+        todaymonth();
+      }
+      if (date == 100) {
+        todayyear();
+      }
+  
+ 
+  
+  }, [props.info]);
 
+
+    
+   
+
+
+
+
+ 
+  // useEffect((props) => {
+  //   props.parentCallback1(info1)
+  // },[info1]);
+  console.log(info1);
+
+  const country = [
+    { name: "Australia", code: "AU" },
+    { name: "Germany", code: "DE" },
+    { name: "Russia", code: "RU" },
+    { name: "US", code: "US" },
+    { name: "Japan", code: "JP" },
+    { name: "India", code: "IN" },
+    { name: "UK", code: "UK" },
+    { name: "France", code: "FR" },
+  ];
 
   const handleChangeCountry = (items) => {
-   const filtereddataCountry = data.filter((item) => item.countryName == items);  
+    const filtereddataCountry = info1.filter(
+      (item) => item.countryName == items
+    );
     console.log(filtereddataCountry);
+    props.parentCallback1(filtereddataCountry);
   };
 
-  const handleChangeVersion= (items) => {
-   let filtereddataversions; 
+  const handleChangeVersion = (items) => {
+    let filtereddataversions;
     if (items == "0.1") {
-      filtereddataversions= data.filter((item)=>item.version.includes("0.1"))
+      filtereddataversions = info1.filter((item) =>
+        item.version.includes("0.1")
+      );
     }
     if (items == "1.0") {
-      filtereddataversions= data.filter((item)=>item.version=="1.0" || item.version=="1" || item.version=="V1" || item.version=="v1.0" )
+      filtereddataversions = info1.filter(
+        (item) =>
+          item.version == "1.0" ||
+          item.version == "1" ||
+          item.version == "V1" ||
+          item.version == "v1.0"
+      );
     }
     if (items == "1.1") {
-      filtereddataversions= data.filter((item)=>item.version.includes("1.1"))
+      filtereddataversions = info1.filter((item) =>
+        item.version.includes("1.1")
+      );
     }
     if (items == "1.2") {
-      filtereddataversions= data.filter((item)=>item.version =="1.2" )
+      filtereddataversions = info1.filter((item) => item.version == "1.2");
     }
     if (items == "1.3") {
-      filtereddataversions= data.filter((item)=>item.version.includes("1.3"))
+      filtereddataversions = info1.filter((item) =>
+        item.version.includes("1.3")
+      );
     }
     if (items == "1.2.1") {
-      filtereddataversions= data.filter((item)=>item.version.includes("1.2.1"))
+      filtereddataversions = info1.filter((item) =>
+        item.version.includes("1.2.1")
+      );
     }
-    // if (event.target.value == 0) {
-    //   todaydate();
-    // }
-    // if (event.target.value == 1) {
-    //   todayweek();
-    // }
-    // if (event.target.value == 10) {
-    //   todaymonth();
-    // }
-    // if (event.target.value == 100) {
-    //   todayyear();
-    // }
-    console.log(data);
+    props.parentCallback1(filtereddataversions);
+
+    console.log(info1);
     console.log(filtereddataversions);
+  };
+  const handleChangeRating = (items) => {
+    const filtereddataRating = info1.filter((item) => item.rating == items);
+    console.log(filtereddataRating);
+    props.parentCallback1(filtereddataRating);
   };
 
   const handleChangeDate = (event) => {
@@ -182,33 +226,42 @@ const MainContent = () => {
     console.log(event.target.value);
     if (event.target.value == -1) {
       todayall();
+      datechange(-1);
+      
     }
     if (event.target.value == 0) {
       todaydate();
+      datechange(0);
     }
     if (event.target.value == 1) {
       todayweek();
+      datechange(1);
     }
     if (event.target.value == 10) {
       todaymonth();
+      datechange(10);
     }
     if (event.target.value == 100) {
       todayyear();
+      datechange(100);
     }
-  };
-  const handleChangeRating = (items) => {
-    const filtereddataRating = data.filter((item) => item.rating == items);
-    console.log(filtereddataRating);
+
+
+ 
   };
 
   const todayall = () => {
-    const datetoday = data;
+    const datetoday = props.info;
     console.log(datetoday);
+    setinfo1(datetoday);
+    setinfodate(datetoday);
+    filter(change,datetoday);
+
   };
 
   const todaydate = () => {
     var b = new Date();
-    const datetoday = data.filter(
+    const datetoday = props.info.filter(
       (items) =>
         new Date(items.reviewDate).getFullYear() === b.getFullYear() &&
         new Date(items.reviewDate).getMonth() === b.getMonth() &&
@@ -216,6 +269,10 @@ const MainContent = () => {
     );
 
     console.log(datetoday);
+    setinfo1(datetoday);
+    setinfodate(datetoday);
+    filter(change,datetoday);
+
   };
 
   const todayweek = () => {
@@ -232,7 +289,7 @@ const MainContent = () => {
     console.log(firstday);
     console.log(lastday);
 
-    const datetoday = data.filter(
+    const datetoday = props.info.filter(
       (items) =>
         (new Date(items.reviewDate) >= firstday &&
           new Date(items.reviewDate) <= lastday) ||
@@ -244,6 +301,10 @@ const MainContent = () => {
           new Date(items.reviewDate).getDate() === lastday.getDate())
     );
     console.log(datetoday);
+    setinfo1(datetoday);
+    setinfodate(datetoday);
+    filter(change,datetoday);
+ 
   };
 
   const todaymonth = () => {
@@ -253,7 +314,7 @@ const MainContent = () => {
     console.log(FirstDay);
     console.log(LastDay);
 
-    const datetoday = data.filter(
+    const datetoday = props.info.filter(
       (items) =>
         (new Date(items.reviewDate) >= FirstDay &&
           new Date(items.reviewDate) <= LastDay) ||
@@ -265,6 +326,10 @@ const MainContent = () => {
           new Date(items.reviewDate).getDate() === LastDay.getDate())
     );
     console.log(datetoday);
+    setinfo1(datetoday);
+    setinfodate(datetoday);
+    filter(change,datetoday);
+  
   };
 
   const todayyear = () => {
@@ -274,7 +339,7 @@ const MainContent = () => {
     console.log(FirstDay);
     console.log(LastDay);
 
-    const datetoday = data.filter(
+    const datetoday = props.info.filter(
       (items) =>
         (new Date(items.reviewDate) >= FirstDay &&
           new Date(items.reviewDate) <= LastDay) ||
@@ -286,21 +351,31 @@ const MainContent = () => {
           new Date(items.reviewDate).getDate() === LastDay.getDate())
     );
     console.log(datetoday);
+    setinfo1(datetoday);
+    setinfodate(datetoday);
+    filter(change,datetoday);
+
   };
 
   const handleChange = (event) => {
     setChange(event.target.value);
     console.log(event.target.value);
+    filter(event.target.value,infodate);
+  };
+  const filter = (changes,item) => {
+    const filteredDataSearch = item.filter(
+      (item) =>
+        item.appStoreName.toUpperCase().indexOf(changes.toUpperCase()) !== -1 ||
+        item.countryName.toUpperCase().indexOf(changes.toUpperCase()) !== -1 ||
+        item.reviewHeading.toUpperCase().indexOf(changes.toUpperCase()) !==
+          -1 ||
+        item.reviewText.toUpperCase().indexOf(changes.toUpperCase()) !== -1
+    );
+    console.log(filteredDataSearch);
+    setinfo1(filteredDataSearch);
+    props.parentCallback1(filteredDataSearch);
   };
 
-  const filteredDataSearch = data.filter(
-    (item) =>
-      item.appStoreName.toUpperCase().indexOf(change.toUpperCase()) !== -1 ||
-      item.countryName.toUpperCase().indexOf(change.toUpperCase()) !== -1 ||
-      item.reviewHeading.toUpperCase().indexOf(change.toUpperCase()) !== -1 ||
-      item.reviewText.toUpperCase().indexOf(change.toUpperCase()) !== -1
-  );
-  console.log(filteredDataSearch);
   return (
     <Grid
       container
@@ -376,7 +451,7 @@ const MainContent = () => {
                 {/* <ListItemIcon> */}
 
                 <Rating name="read-only" value={5} readOnly />
-                {data.filter((item)=>item.rating==5).length}
+                {info1.filter((item) => item.rating == 5).length}
 
                 {/* </ListItemIcon>
             <ListItemText primary="Starred" /> */}
@@ -389,7 +464,7 @@ const MainContent = () => {
                 {/* <ListItemIcon> */}
 
                 <Rating name="read-only" value={4} readOnly />
-                {data.filter((item)=>item.rating==4).length}
+                {info1.filter((item) => item.rating == 4).length}
                 {/* </ListItemIcon>
             <ListItemText primary="Starred" /> */}
               </ListItem>
@@ -399,7 +474,7 @@ const MainContent = () => {
                 className={classes.nested}
               >
                 <Rating name="read-only" value={3} readOnly />
-                {data.filter((item)=>item.rating==3).length}
+                {info1.filter((item) => item.rating == 3).length}
                 {/* </ListItemIcon>
             <ListItemText primary="Starred" /> */}
               </ListItem>
@@ -411,7 +486,7 @@ const MainContent = () => {
                 {/* <ListItemIcon> */}
 
                 <Rating name="read-only" value={2} readOnly />
-                {data.filter((item)=>item.rating==2).length}
+                {info1.filter((item) => item.rating == 2).length}
                 {/* </ListItemIcon>
             <ListItemText primary="Starred" /> */}
               </ListItem>
@@ -423,7 +498,7 @@ const MainContent = () => {
                 {/* <ListItemIcon> */}
 
                 <Rating name="read-only" value={1} readOnly />
-                {data.filter((item)=>item.rating==1).length}
+                {info1.filter((item) => item.rating == 1).length}
                 {/* </ListItemIcon>
             <ListItemText primary="Starred" /> */}
               </ListItem>
@@ -438,34 +513,71 @@ const MainContent = () => {
           </ListItem>
           <Collapse in={open2} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-              <ListItem button  onClick={() => handleChangeVersion("0.1")} className={classes.nested}>
-              0.1  {data.filter((item)=>item.version.includes("0.1")).length}
+              <ListItem
+                button
+                onClick={() => handleChangeVersion("0.1")}
+                className={classes.nested}
+              >
+                0.1{" "}
+                {info1.filter((item) => item.version.includes("0.1")).length}
                 {/* </ListItemIcon>
             <ListItemText primary="Starred" /> */}
               </ListItem>
-              <ListItem button onClick={() => handleChangeVersion("1.2.1")} className={classes.nested}>
+              <ListItem
+                button
+                onClick={() => handleChangeVersion("1.2.1")}
+                className={classes.nested}
+              >
                 {/* <ListItemIcon> */}
-              1.2.1 {data.filter((item)=>item.version.includes("1.2.1")).length}
+                1.2.1{" "}
+                {info1.filter((item) => item.version.includes("1.2.1")).length}
                 {/* </ListItemIcon>
             <ListItemText primary="Starred" /> */}
               </ListItem>
-              <ListItem button onClick={() => handleChangeVersion("1.0")} className={classes.nested}>
-                1.0    {  data.filter((item)=>item.version=="1.0" || item.version=="1" || item.version=="V1" || item.version=="v1.0" ).length}
+              <ListItem
+                button
+                onClick={() => handleChangeVersion("1.0")}
+                className={classes.nested}
+              >
+                1.0{" "}
+                {
+                  info1.filter(
+                    (item) =>
+                      item.version == "1.0" ||
+                      item.version == "1" ||
+                      item.version == "V1" ||
+                      item.version == "v1.0"
+                  ).length
+                }
                 {/* </ListItemIcon>
             <ListItemText primary="Starred" /> */}
               </ListItem>
-              <ListItem button onClick={() =>handleChangeVersion("1.1")} className={classes.nested}>
-                1.1   {data.filter((item)=>item.version.includes("1.1")).length}
+              <ListItem
+                button
+                onClick={() => handleChangeVersion("1.1")}
+                className={classes.nested}
+              >
+                1.1{" "}
+                {info1.filter((item) => item.version.includes("1.1")).length}
                 {/* </ListItemIcon>
             <ListItemText primary="Starred" /> */}
               </ListItem>
-              <ListItem button onClick={() => handleChangeVersion("1.2")} className={classes.nested}>
-                1.2   {data.filter((item)=>item.version =="1.2" ).length}
+              <ListItem
+                button
+                onClick={() => handleChangeVersion("1.2")}
+                className={classes.nested}
+              >
+                1.2 {info1.filter((item) => item.version == "1.2").length}
                 {/* </ListItemIcon>
             <ListItemText primary="Starred" /> */}
               </ListItem>
-              <ListItem button onClick={() => handleChangeVersion("1.3")} className={classes.nested}>
-                1.3    {data.filter((item)=>item.version.includes("1.3")).length}
+              <ListItem
+                button
+                onClick={() => handleChangeVersion("1.3")}
+                className={classes.nested}
+              >
+                1.3{" "}
+                {info1.filter((item) => item.version.includes("1.3")).length}
                 {/* </ListItemIcon>
             <ListItemText primary="Starred" /> */}
               </ListItem>
@@ -480,12 +592,19 @@ const MainContent = () => {
           </ListItem>
           <Collapse in={open3} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-              {country.map((item)=>(
-              <ListItem button onClick={()=>(handleChangeCountry(item.name))} className={classes.nested}>             
-    
-                {item.name}  {data.filter((items) => items.countryName == item.name).length}
-              </ListItem>))
-              }       
+              {country.map((item) => (
+                <ListItem
+                  button
+                  onClick={() => handleChangeCountry(item.name)}
+                  className={classes.nested}
+                >
+                  {item.name}{" "}
+                  {
+                    info1.filter((items) => items.countryName == item.name)
+                      .length
+                  }
+                </ListItem>
+              ))}
             </List>
           </Collapse>
         </List>

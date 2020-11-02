@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component, useState, useEffect } from "react";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -91,33 +91,64 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ProdSort = () => {
+const ProdSort = (props) => {
   const classes = useStyles();
   const [app, setApp] = React.useState("All");
   const [sort, setSort] = React.useState("newest");
 
+  const senddatatoparent = (item) => {
+    props.parentCallback(item);
+  };
+
   const handleChange = (event) => {
     setApp(event.target.value);
+    filter(event.target.value);
   };
 
   const handleSort = (event) => {
     setSort(event.target.value);
+    filter1(event.target.value);
   };
 
-  const filterdata =
-    app == "All" ? data : data.filter((item) => app == item.appID);
+  const filter = (item1) => {
 
-  const filterdataSort =
-    sort == "newest"
-      ? filterdata.sort(function (a, b) {
-          return new Date(b.reviewDate) - new Date(a.reviewDate);
-        })
-      : filterdata.sort(function (a, b) {
-          return new Date(a.reviewDate) - new Date(b.reviewDate);
-        });
+    const filterdata =
+      item1 == "All" ? data : data.filter((item) => item1 == item.appID);
 
-  
-  console.log(filterdataSort);
+    
+    const filterdataSort =
+      sort == "newest"
+        ? filterdata.sort(function (a, b) {
+            return new Date(b.reviewDate) - new Date(a.reviewDate);
+          })
+        : filterdata.sort(function (a, b) {
+            return new Date(a.reviewDate) - new Date(b.reviewDate);
+          });
+   
+    senddatatoparent(filterdataSort);
+  };
+
+  const filter1 = (item1) => {
+    const filterdata =
+      app == "All" ? data : data.filter((item) => app == item.appID);
+
+    const filterdataSort =
+      item1 == "newest"
+        ? filterdata.sort(function (a, b) {
+            return new Date(b.reviewDate) - new Date(a.reviewDate);
+          })
+        : filterdata.sort(function (a, b) {
+            return new Date(a.reviewDate) - new Date(b.reviewDate);
+          });
+    senddatatoparent(filterdataSort);
+  };
+
+  // useEffect((props) => {
+  //   props.parentCallback(filterdataSort);
+
+  // },[filterdataSort]);
+  // sendtoParent(filterdataSort);
+
   return (
     <Grid container spacing={3}>
       <Grid item xs={8} sm={8}>
