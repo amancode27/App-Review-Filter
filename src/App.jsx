@@ -16,7 +16,7 @@ const theme= createMuiTheme({
 
 const App = () => {
   return (
-    <BrowserRouter basename="/">
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Switch>
       <MuiThemeProvider theme={theme}>
         <Route exact path="/" render={() => <MainPage />} />
