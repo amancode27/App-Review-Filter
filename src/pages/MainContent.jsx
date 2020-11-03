@@ -19,6 +19,14 @@ import ExpandMore from "@material-ui/icons/ExpandMore";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Typography from "@material-ui/core/Typography";
+import AU from "./../img/AU.png";
+import de from "./../img/de.png";
+import FR from "./../img/FR.png";
+import IN from "./../img/IN.png";
+import JP from "./../img/JP.png";
+import RU from "./../img/RU.png";
+import UK from "./../img/UK.png";
+import US from "./../img/US.png";
 
 const useStyles1 = makeStyles({
   root: {
@@ -124,8 +132,11 @@ const MainContent = (props) => {
     setOpen3(!open3);
   };
 
+
+
   useEffect(() => {
-    console.log("hello");
+    
+
     setinfo1(props.info);
     setinfodate(props.info);
 
@@ -146,24 +157,24 @@ const MainContent = (props) => {
     }
   }, [props.info]);
 
-  console.log(info1);
+
 
   const country = [
-    { name: "Australia", code: "AU" },
-    { name: "Germany", code: "DE" },
-    { name: "Russia", code: "RU" },
-    { name: "US", code: "US" },
-    { name: "Japan", code: "JP" },
-    { name: "India", code: "IN" },
-    { name: "UK", code: "UK" },
-    { name: "France", code: "FR" },
+    { name: "Australia", code: AU  },
+    { name: "Germany", code: de },
+    { name: "Russia", code: RU },
+    { name: "US", code: US },
+    { name: "Japan", code: JP },
+    { name: "India", code: IN },
+    { name: "UK", code: UK },
+    { name: "France", code: FR },
   ];
 
   const handleChangeCountry = (items) => {
     const filtereddataCountry = info1.filter(
       (item) => item.countryName == items
     );
-    console.log(filtereddataCountry);
+
     props.parentCallback1(filtereddataCountry);
   };
 
@@ -203,18 +214,17 @@ const MainContent = (props) => {
     }
     props.parentCallback1(filtereddataversions);
 
-    console.log(info1);
-    console.log(filtereddataversions);
+  
   };
   const handleChangeRating = (items) => {
     const filtereddataRating = info1.filter((item) => item.rating == items);
-    console.log(filtereddataRating);
+   
     props.parentCallback1(filtereddataRating);
   };
 
   const handleChangeDate = (event) => {
     setScale(event.target.value);
-    console.log(event.target.value);
+    
     if (event.target.value == -1) {
       todayall();
       datechange(-1);
@@ -239,7 +249,7 @@ const MainContent = (props) => {
 
   const todayall = () => {
     const datetoday = props.info;
-    console.log(datetoday);
+   
     setinfo1(datetoday);
     setinfodate(datetoday);
     filter(change, datetoday);
@@ -254,7 +264,7 @@ const MainContent = (props) => {
         new Date(items.reviewDate).getDate() === b.getDate()
     );
 
-    console.log(datetoday);
+  
     setinfo1(datetoday);
     setinfodate(datetoday);
     filter(change, datetoday);
@@ -262,7 +272,7 @@ const MainContent = (props) => {
 
   const todayweek = () => {
     var curr = new Date();
-    console.log(curr);
+
 
     var a = curr.getDate();
     var b = curr.getDay();
@@ -271,8 +281,7 @@ const MainContent = (props) => {
     }
     var firstday = new Date(curr.setDate(a - b + 1));
     var lastday = new Date(curr.setDate(a - b + 7));
-    console.log(firstday);
-    console.log(lastday);
+   
 
     const datetoday = props.info.filter(
       (items) =>
@@ -285,7 +294,7 @@ const MainContent = (props) => {
           new Date(items.reviewDate).getMonth() === lastday.getMonth() &&
           new Date(items.reviewDate).getDate() === lastday.getDate())
     );
-    console.log(datetoday);
+
     setinfo1(datetoday);
     setinfodate(datetoday);
     filter(change, datetoday);
@@ -295,8 +304,7 @@ const MainContent = (props) => {
     var curr = new Date();
     var FirstDay = new Date(curr.getFullYear(), curr.getMonth(), 1);
     var LastDay = new Date(curr.getFullYear(), curr.getMonth() + 1, 0);
-    console.log(FirstDay);
-    console.log(LastDay);
+
 
     const datetoday = props.info.filter(
       (items) =>
@@ -309,7 +317,7 @@ const MainContent = (props) => {
           new Date(items.reviewDate).getMonth() === LastDay.getMonth() &&
           new Date(items.reviewDate).getDate() === LastDay.getDate())
     );
-    console.log(datetoday);
+    
     setinfo1(datetoday);
     setinfodate(datetoday);
     filter(change, datetoday);
@@ -319,8 +327,7 @@ const MainContent = (props) => {
     var curr = new Date();
     var FirstDay = new Date(curr.getFullYear(), 0, 1);
     var LastDay = new Date(curr.getFullYear(), 11, 31);
-    console.log(FirstDay);
-    console.log(LastDay);
+
 
     const datetoday = props.info.filter(
       (items) =>
@@ -333,7 +340,6 @@ const MainContent = (props) => {
           new Date(items.reviewDate).getMonth() === LastDay.getMonth() &&
           new Date(items.reviewDate).getDate() === LastDay.getDate())
     );
-    console.log(datetoday);
     setinfo1(datetoday);
     setinfodate(datetoday);
     filter(change, datetoday);
@@ -341,7 +347,6 @@ const MainContent = (props) => {
 
   const handleChange = (event) => {
     setChange(event.target.value);
-    console.log(event.target.value);
     filter(event.target.value, infodate);
   };
   const filter = (changes, item) => {
@@ -353,7 +358,7 @@ const MainContent = (props) => {
           -1 ||
         item.reviewText.toUpperCase().indexOf(changes.toUpperCase()) !== -1
     );
-    console.log(filteredDataSearch);
+
     setinfo1(filteredDataSearch);
     props.parentCallback1(filteredDataSearch);
   };
@@ -639,7 +644,8 @@ const MainContent = (props) => {
                   className={classes.nested}
                 >
              
-                  {item.name}   {" "}
+                       <img src={item.code}  width="18" style={{borderRadius:"2px"}}
+         height="12"/>  <span style={{marginRight:`.5em`, display:"inline-block"}}>&nbsp;</span>   {item.name}  <span style={{marginRight:`${9.8-(item.name.length*5.2/14)}em`, display:"inline-block"}}>&nbsp;</span> {" "}
                   {
                     info1.filter((items) => items.countryName == item.name)
                       .length

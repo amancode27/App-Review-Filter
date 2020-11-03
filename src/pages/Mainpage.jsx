@@ -11,32 +11,28 @@ import './../index.css'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
-    
+    flexGrow: 1,    
   },
 }));
 
 const MainPage = () => {
   const classes = useStyles();
   const [info, setinfo] = useState(data);
-  const [infofinal,setinfofinal] =useState(data)
+  const [infofinal,setinfofinal] =useState(data);
 
-  const callback = (count) => {
+
+  const callback = (count) => { 
+  
     setinfo(count);
-    console.log(count);
     setinfofinal(count);
     // do something with value in parent component, like save to state
 }
 
 const callback1 = (count1) =>
-{ 
- console.log(count1);
+{
+
  setinfofinal(count1);
-
-// 
-
 }
-console.log(info)
 
   return (
     <div id={"body"}className={classes.root}>

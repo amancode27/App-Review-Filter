@@ -10,6 +10,10 @@ import Grid from "@material-ui/core/Grid";
 import data from "./../data/review.json";
 import HeightIcon from "@material-ui/icons/Height";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
+import NotificationsIcon from "@material-ui/icons/Notifications";
+
+
+
 const BootstrapInput = withStyles((theme) => ({
   root: {
     "label + &": {
@@ -95,6 +99,8 @@ const ProdSort = (props) => {
   const classes = useStyles();
   const [app, setApp] = React.useState("All");
   const [sort, setSort] = React.useState("newest");
+  var first=data.slice(); 
+ 
 
   const senddatatoparent = (item) => {
     props.parentCallback(item);
@@ -103,17 +109,24 @@ const ProdSort = (props) => {
   const handleChange = (event) => {
     setApp(event.target.value);
     filter(event.target.value);
+    
   };
 
   const handleSort = (event) => {
+    
     setSort(event.target.value);
     filter1(event.target.value);
   };
+  useEffect(() => {
+     filter(app);
+     filter1(sort)
+  },[]);
+
 
   const filter = (item1) => {
 
-    const filterdata =
-      item1 == "All" ? data : data.filter((item) => item1 == item.appID);
+    let filterdata =
+      item1 == "All" ? first : first.filter((item) => item1 == item.appID);
 
     
     const filterdataSort =
@@ -129,8 +142,9 @@ const ProdSort = (props) => {
   };
 
   const filter1 = (item1) => {
-    const filterdata =
-      app == "All" ? data : data.filter((item) => app == item.appID);
+   
+    let filterdata =
+      app == "All" ? first : first.filter((item) => app == item.appID);
 
     const filterdataSort =
       item1 == "newest"
@@ -142,12 +156,6 @@ const ProdSort = (props) => {
           });
     senddatatoparent(filterdataSort);
   };
-
-  // useEffect((props) => {
-  //   props.parentCallback(filterdataSort);
-
-  // },[filterdataSort]);
-  // sendtoParent(filterdataSort);
 
   return (
     <Grid container spacing={3}>
@@ -165,8 +173,9 @@ const ProdSort = (props) => {
             value={app}
             IconComponent={KeyboardArrowDownIcon}
             onChange={handleChange}
-            
+               
             input={<BootstrapInput />}
+  
           >
             <MenuItem value="All">
               <em>All</em>
@@ -186,6 +195,7 @@ const ProdSort = (props) => {
             id="demo-customized-select"
             value={sort}
             onChange={handleSort}
+        
             IconComponent={HeightIcon}
             input={<BootstrapInputSort />}
           >

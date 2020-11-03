@@ -4,6 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
+import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import WifiIcon from "@material-ui/icons/Wifi";
 import GetAppIcon from "@material-ui/icons/GetApp";
@@ -13,6 +14,14 @@ import Paper from "@material-ui/core/Paper";
 import Paginations from "./Pagination";
 import Rating from "@material-ui/lab/Rating";
 import "./../index.css";
+import Australia from "./../img/AU.png";
+import Germany from "./../img/de.png";
+import France from "./../img/FR.png";
+import India from "./../img/IN.png";
+import Japan from "./../img/JP.png";
+import Russia from "./../img/RU.png";
+import UK from "./../img/UK.png";
+import US from "./../img/US.png";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -207,12 +216,12 @@ const Content = (props) => {
                     <Grid item xs container direction="column" spacing={1}>
                       <Grid container>
                         <Grid item xs>
-                          <Typography gutterBottom variant="subtitle1">
-                            {item.reviewUserName}
+                          <Typography gutterBottom style={{fontWeight:"900"}}variant="subtitle1">
+                           &nbsp;&nbsp;&nbsp;by {item.reviewUserName}
                           </Typography>
                         </Grid>
                         <Grid item xs>
-                          <Typography variant="h6" gutterBottom>
+                          <Typography style={{ position: "relative", right: "5em",fontWeight:"900" }} variant="subtitle1" gutterBottom>
                             {item.reviewDate.slice(
                               0,
                               item.reviewDate.length - 9
@@ -220,13 +229,18 @@ const Content = (props) => {
                           </Typography>
                         </Grid>
                         <Grid item xs>
-                          <Typography variant="h6">
+                          <Typography style={{ position: "relative", right: "8.5em",fontWeight:"900"} }variant="subtitle1">
                             {item.version}
                           </Typography>
                         </Grid>
 
                         <Grid item xs>
-                          <Typography variant="h6">
+                          <Typography  style={{ position: "relative", right: "15em" ,fontWeight:"900"}} variant="subtitle1">
+                            <img src= {item.countryName=="Australia"?Australia:item.countryName=="France"?France:
+                            item.countryName=="India"?India:item.countryName=="UK"?UK:item.countryName=="US"?US:
+                            item.countryName=="Germany"?Germany:item.countryName=="Japan"?
+                            Japan:item.countryName=="Russia"?Russia:null} width="18" style={{borderRadius:"2px"}}
+                            height="12"/>  <span style={{marginRight:`.5em`, display:"inline-block"}}>&nbsp;</span>  
                             {item.countryName}
                           </Typography>
                         </Grid>
@@ -243,7 +257,7 @@ const Content = (props) => {
                             style={{ position: "relative", left: "5em" }}
                             variant="h6"
                           >
-                            share <ArrowDropDownIcon />
+                            share  <KeyboardArrowDownIcon style={{position:"relative",top:".28em",right:".12em"}}/>
                           </Typography>
                         </Grid>
                       </Grid>
