@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/App-Review-Filter/static/css/main.87474877.chunk.css",
+    "main.js": "/App-Review-Filter/static/js/main.878bc60a.chunk.js",
+    "main.js.map": "/App-Review-Filter/static/js/main.878bc60a.chunk.js.map",
+    "runtime-main.js": "/App-Review-Filter/static/js/runtime-main.300fc611.js",
+    "runtime-main.js.map": "/App-Review-Filter/static/js/runtime-main.300fc611.js.map",
+    "static/js/2.2d486161.chunk.js": "/App-Review-Filter/static/js/2.2d486161.chunk.js",
+    "static/js/2.2d486161.chunk.js.map": "/App-Review-Filter/static/js/2.2d486161.chunk.js.map",
+    "static/js/3.83aef6b6.chunk.js": "/App-Review-Filter/static/js/3.83aef6b6.chunk.js",
+    "static/js/3.83aef6b6.chunk.js.map": "/App-Review-Filter/static/js/3.83aef6b6.chunk.js.map",
+    "index.html": "/App-Review-Filter/index.html",
+    "static/css/main.87474877.chunk.css.map": "/App-Review-Filter/static/css/main.87474877.chunk.css.map",
+    "static/js/2.2d486161.chunk.js.LICENSE.txt": "/App-Review-Filter/static/js/2.2d486161.chunk.js.LICENSE.txt",
+    "static/media/IN.540989b6.png": "/App-Review-Filter/static/media/IN.540989b6.png",
+    "static/media/US.ff1425e7.png": "/App-Review-Filter/static/media/US.ff1425e7.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.300fc611.js",
+    "static/js/2.2d486161.chunk.js",
+    "static/css/main.87474877.chunk.css",
+    "static/js/main.878bc60a.chunk.js"
+  ]
+}
