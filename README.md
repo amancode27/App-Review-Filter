@@ -1,6 +1,9 @@
-# Getting Started with Create React App
+# App Review Filter System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was based on any Json Based Filtering of Data through 5 paramters namely Rating ,Version ,Country,DateRange,Sorting as well as Apptype
+# Dummy Json
+
+Place any Dummy Json and Try to filter data on particular parameters
 
 ## Available Scripts
 
