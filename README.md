@@ -1,6 +1,6 @@
 # App Review Filter System
 
-This project was based on any Json Based Filtering of Data through 5 paramters namely Rating ,Version ,Country,DateRange,Sorting as well as Apptype
+This project was based on any Json Based Filtering of Data through 5 paramters namely [Rating]  [Version] [Country] [DateRange] [Sorting] as well as [Apptype]
 # Dummy Json
 
 Place any Dummy Json and Try to filter data on particular parameters
